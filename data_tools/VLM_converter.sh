@@ -1,31 +1,21 @@
 #!/bin/bash
-export CUDA_VISIBLE_DEVICES=0,1,2,3
-export PYTHONPATH=/home/noah-22/QA_data_generation_CARLA:$PYTHONPATH
+export CUDA_VISIBLE_DEVICES=0,1
+
+# Set the CUDA library path
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH
+
+# Force bitsandbytes to use the correct CUDA 11.8 libraries
+export BNB_CUDA_VERSION=118
+
+# Set the Python path for your project
+export PYTHONPATH="/home/hestia-22/Desktop/Heavy-Machinery-Autonomous-Navigation-with-VLMs"
 
 echo "Start generating dataset..."
 
-# Process the entire dataset
-/home/noah-22/miniconda3/envs/QArla/bin/python \
+# MODIFIED: Changed --output_file to --output_dir and pointed it to a new folder
+/home/hestia-22/anaconda3/envs/sensmore/bin/python \
     data_tools/QA_data_generation.py \
-    --data_path /home/noah-22/QA_data_generation_CARLA/data \
-    --output_file /home/noah-22/QA_data_generation_CARLA/output \
-    --max_frames 100000000000000000000000
-
-# Alternatively, you can process only specific scenario types
-# /home/noah-22/miniconda3/envs/QArla/bin/python \
-#     data_tools/QA_data_generation.py \
-#     --data_path /home/noah-22/QA_data_generation_CARLA/data \
-#     --output_file /home/noah-22/QA_data_generation_CARLA/output/accident_dataset.json \
-#     --process_type Accident \
-#     --max_frames 100000000000000000000000
-
-# Or process a single scenario folder
-# /home/noah-22/miniconda3/envs/QArla/bin/python \
-#     data_tools/QA_data_generation.py \
-#     --data_path /home/noah-22/QA_data_generation_CARLA/data \
-#     --output_file /home/noah-22/QA_data_generation_CARLA/output/single_scenario.json \
-#     --process_single /home/noah-22/QA_data_generation_CARLA/data/Accident/Accident_1 \
-#     --max_frames 100000000000000000000000
+    --image_folder /home/hestia-22/Desktop/video_frames_reduced \
+    --output_dir /home/hestia-22/Desktop/Heavy-Machinery-Autonomous-Navigation-with-VLMs/output_data
 
 echo "Dataset generation complete."
-
