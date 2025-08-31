@@ -1,0 +1,15 @@
+accelerate==1.6.0
+bitsandbytes==0.45.5
+decord==0.6.0
+deepspeed==0.16.7
+einops==0.8.1
+einops_exts==0.0.4
+huggingface_hub==0.31.2
+numpy==2.2.5
+packaging==25.0
+peft==0.15.2
+Pillow==11.2.1
+Requests==2.32.3
+tokenizers==0.21.1
+tqdm==4.67.1
+transformers==4.51.3
