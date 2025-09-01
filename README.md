@@ -25,7 +25,7 @@ In **"CLIP"** folder, you should download the OPENAI [clip-vit-large-patch14-336
 
 Instead, in **"llava34b"** folder, you should download the [LLaVA-v1.6-34b](https://huggingface.co/liuhaotian/llava-v1.6-34b/tree/main) model from HuggingFace.
 
-Make sure to assign the right path of the model in the code [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/data_tools/QA_data_generation.py#L24) and the right PYTHONPATH, CUDA_VISIBLE_DEVICES, LD_LIBRARY_PATH, BNB_CUDA_VERSION, image folder and output directory paths [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/data_tools/VLM_converter.sh#L2-L19). Moreover, if you have installed Anaconda instead of Miniconda, replace "miniconda3" with "anaconda3" [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/data_tools/VLM_converter.sh#L16).
+Make sure to assign the right path of the model in the code [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/data_tools/QA_data_generation.py#L24) and the right PYTHONPATH, CUDA_VISIBLE_DEVICES, LD_LIBRARY_PATH, BNB_CUDA_VERSION, image folder and output directory paths [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/data_tools/VLM_converter.sh#L2-L19). Moreover, if you have installed Miniconda instead of Anaconda, replace "anaconda3" with "miniconda3" [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/data_tools/VLM_converter.sh#L16).
 
 ## Generate Question-Answer Data
 

@@ -12,7 +12,6 @@ export PYTHONPATH="/home/hestia-22/Desktop/Heavy-Machinery-Autonomous-Navigation
 
 echo "Start generating dataset..."
 
-# MODIFIED: Changed --output_file to --output_dir and pointed it to a new folder
 /home/hestia-22/anaconda3/envs/sensmore/bin/python \
     data_tools/QA_data_generation.py \
     --image_folder /home/hestia-22/Desktop/video_frames_reduced \

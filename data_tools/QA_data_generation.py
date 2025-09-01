@@ -7,7 +7,6 @@ from PIL import Image
 from glob import glob
 from accelerate import init_empty_weights
 
-# LLaVA components (ensure you have these installed)
 from llava_next.llava.mm_utils import get_model_name_from_path, process_images, tokenizer_image_token
 from llava_next.llava.constants import IMAGE_TOKEN_INDEX, DEFAULT_IMAGE_TOKEN
 from llava_next.llava.conversation import conv_templates, SeparatorStyle
@@ -78,7 +77,7 @@ def query_llava(query_text, image_path, tokenizer, model, image_processor):
         print(f"Error querying LLaVA for image {os.path.basename(image_path)}: {e}")
         return f"Error processing query: {e}"
 
-# --- New QA Generation Functions for the Wheel Loader Challenge ---
+# --- QA Generation Functions ---
 
 def generate_localization_qa(image_path, tokenizer, model, image_processor):
     """
@@ -126,7 +125,6 @@ def generate_hazard_qa(image_path, tokenizer, model, image_processor):
 
 # --- Main Processing Function ---
 
-# MODIFIED: Changed argument from `output_file` to `output_dir`
 def process_images_and_generate_qa(image_folder, output_dir, tokenizer, model, image_processor, max_images=None):
     """
     Main processing pipeline. Iterates through images, saves a JSON for each,
@@ -145,7 +143,6 @@ def process_images_and_generate_qa(image_folder, output_dir, tokenizer, model, i
 
     print(f"Found {len(image_paths)} images to process.")
     
-    # MODIFIED: Create the main output directory and a subdirectory for individual files
     individual_frames_dir = os.path.join(output_dir, "individual_frames")
     os.makedirs(individual_frames_dir, exist_ok=True)
         
@@ -165,7 +162,6 @@ def process_images_and_generate_qa(image_folder, output_dir, tokenizer, model, i
                 "qa_pairs": qa_pairs
             }
             
-            # MODIFIED: Save the JSON file for the individual frame
             image_basename = os.path.basename(image_path)
             json_filename = os.path.splitext(image_basename)[0] + '.json'
             individual_json_path = os.path.join(individual_frames_dir, json_filename)
@@ -177,7 +173,6 @@ def process_images_and_generate_qa(image_folder, output_dir, tokenizer, model, i
         except Exception as e:
             print(f"Failed to process {os.path.basename(image_path)}: {e}")
             
-    # MODIFIED: Save the complete, consolidated dataset
     final_json_path = os.path.join(output_dir, "_all_frames.json")
     with open(final_json_path, 'w') as f:
         json.dump(all_qa_data, f, indent=4)
@@ -191,7 +186,6 @@ def main():
     parser = argparse.ArgumentParser(description="Generate QA data for VLM fine-tuning using images of construction sites.")
     parser.add_argument("--image_folder", type=str, required=True, 
                         help="Path to the folder containing your JPG or PNG images.")
-    # MODIFIED: Changed argument to --output_dir
     parser.add_argument("--output_dir", type=str, required=True, 
                         help="Path to the directory where output JSON files will be saved.")
     parser.add_argument("--max_images", type=int, default=None, 
@@ -201,7 +195,6 @@ def main():
     # Load the VLM
     tokenizer, model, image_processor = load_llava_model()
     
-    # MODIFIED: Pass the output directory to the processing function
     process_images_and_generate_qa(
         args.image_folder,
         args.output_dir,
