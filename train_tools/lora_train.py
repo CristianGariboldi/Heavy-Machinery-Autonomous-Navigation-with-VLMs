@@ -701,12 +701,12 @@ class LazySupervisedDataset(Dataset):
             sources = [sources]
         assert len(sources) == 1, "Don't know why it is wrapped to a list"  # FIXME
         if 'image' in sources[0]:
-            image_file = self.list_data_dict[i]['images']
-            image_folder = self.data_args.image_folder
+            # Use the correct key 'image' (singular) to get the single file path
+            image_file = self.list_data_dict[i]['image']
             processor = self.data_args.image_processor
-            #print(image_file)
-            # image = Image.open(image_file).convert('RGB')
-            image = load_images(image_file[:6])
+            
+            # Use the singular 'load_image' function
+            image = load_image(image_file)
 
             if self.data_args.image_aspect_ratio == 'pad':
                 def expand2square(pil_img, background_color):
@@ -721,16 +721,11 @@ class LazySupervisedDataset(Dataset):
                         result = Image.new(pil_img.mode, (height, height), background_color)
                         result.paste(pil_img, ((height - width) // 2, 0))
                         return result
-                for i, img in enumerate(image):
-                    img = expand2square(img, tuple(int(x*255) for x in processor.image_mean))
-                    img = processor.preprocess(img, return_tensors='pt')['pixel_values'][0]
-                    image[i] = img
-                image = torch.stack(image)
-            else:
-                for i, img in enumerate(image):
-                    img = processor.preprocess(img, return_tensors='pt')['pixel_values'][0]
-                    image[i] = img
-                image = torch.stack(image)
+                image = expand2square(image, tuple(int(x*255) for x in processor.image_mean))
+            
+            # Preprocess the single image directly into a tensor
+            image = processor.preprocess(image, return_tensors='pt')['pixel_values'][0]
+            
             sources = preprocess_multimodal(
                 copy.deepcopy([e["conversations"] for e in sources]),
                 self.data_args)

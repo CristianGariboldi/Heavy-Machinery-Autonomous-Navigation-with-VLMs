@@ -56,5 +56,17 @@ Also in this case, I already provide this file for your convenience, which you c
 
 We can now move to the next step.
 
+
 ## Fine-tuning
 
+We are going to fine-tune a more lightweight model, specifically vicuna-7b-v1.5, which you can download from [here](https://huggingface.co/lmsys/vicuna-7b-v1.5/tree/main).
+
+Once downloaded locally, make sure to specify the right paths [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/train_tools/train_lora.sh#L3-L5), [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/train_tools/train_lora.sh#L20-L22), [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/train_tools/train_lora.sh#L24-L25) and [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/train_tools/train_lora.sh#L32).
+
+Once everything is set up, simply run:
+
+```
+sh train_tools/train_lora.sh
+```
+
+The training loop using LoRA will start and once finished it will saved the fine-tuned model in the output directory.

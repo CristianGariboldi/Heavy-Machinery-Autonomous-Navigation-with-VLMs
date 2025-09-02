@@ -69,6 +69,9 @@ class LlavaLlamaForCausalLM(LlamaForCausalLM, LlavaMetaForCausalLM):
         if vision_tower is None or images is None or input_ids.shape[1] == 1:
             return input_ids, position_ids, attention_mask, past_key_values, None, labels
 
+        if images.ndim == 4:
+            images = images.unsqueeze(1)
+
         assert images.ndim == 5  # B, N, C, H, W
         # images = rearrange(images, 'B N C H W -> (B N) C H W')
         # image_features = self.encode_images(images)  # B, N, 576, 1024
