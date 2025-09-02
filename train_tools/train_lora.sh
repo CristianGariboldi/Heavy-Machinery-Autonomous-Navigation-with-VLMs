@@ -13,15 +13,15 @@ export NCCL_IB_DISABLE="1"
 
 
 # add python envs & data dir to workspace
-ln -sf /cluster_home/custom_data/data/QA_data_generation_CARLA/data .
-ln -sf /cluster_home/custom_data/data/QA_data_generation_CARLA/checkpoints .
+ln -sf /cluster_home/custom_data/data/Heavy-Machinery-Autonomous-Navigation-with-VLMs/data .
+ln -sf /cluster_home/custom_data/data/Heavy-Machinery-Autonomous-Navigation-with-VLMs/checkpoints .
 
 
 export PATH=/home/hestia-22/anaconda3/envs/sensmore/bin/python:$PATH
 export PYTHONPATH="/home/hestia-22/Desktop/Heavy-Machinery-Autonomous-Navigation-with-VLMs"
 export CUDA_VISIBLE_DEVICES="0,1"
 
-deepspeed Desktop/Heavy-Machinery-Autonomous-Navigation-with-VLMs/train_tools/full_param_train.py \
+deepspeed Desktop/Heavy-Machinery-Autonomous-Navigation-with-VLMs/train_tools/lora_train.py \
     --deepspeed path/to/zero3.json \
     --lora_enable True --lora_r 128 --lora_alpha 256 --mm_projector_lr 2e-5 \
     --freeze_img_adapter False \
