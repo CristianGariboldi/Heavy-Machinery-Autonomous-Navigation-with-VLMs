@@ -53,6 +53,13 @@ python3 data_tools/convert2llama.py
 
 Also in this case, I already provide this file for your convenience, which you can find it in "output_data" folder, called "llama_format_dataset.json". Before running the script, just make sure to provide the right paths [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/data_tools/convert2llama.py#L61-L67).
 
+Last but not least, we should split this dataset for training/evaluation. We will do a stratified split to make sure the actions distribution is similar in both datasets. Simply run:
+
+```
+python3 data_tools/split_dataset.py
+```
+
+You will generate training and evaluation json files in "output_data" folder. Make sure to add the right paths [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/data_tools/split_dataset.py#L89-L92) before running the script.
 
 We can now move to the next step.
 
