@@ -66,7 +66,7 @@ We can now move to the next step.
 
 ## Fine-tuning
 
-We are going to fine-tune a more lightweight model, specifically vicuna-7b-v1.5, which you can download from [here](https://huggingface.co/lmsys/vicuna-7b-v1.5/tree/main).
+We are going to fine-tune a more lightweight model, specifically vicuna-7b-v1.5, which you can download from [here](https://huggingface.co/rb93dett/Senna/tree/main).
 
 Once downloaded locally, make sure to specify the right paths [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/train_tools/train_lora.sh#L3-L5), [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/train_tools/train_lora.sh#L20-L22), [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/train_tools/train_lora.sh#L24-L25) and [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/train_tools/train_lora.sh#L32).
 
@@ -88,3 +88,14 @@ If you have the computation capabilities to run a full-parameter fine-tuning ins
 
 ## Evaluation
 
+After fine-tuning is successfully concluded, we can now evaluate its performance on the evaluation dataset.
+
+Simply run:
+
+```
+sh eval_tools/eval.sh
+```
+
+Before running the script, make sure to add the right paths [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/eval_tools/eval.py#L141-L144) and [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/eval_tools/eval.sh#L1-L2).
+
+It will by default evaluate the fine-tuned model with LoRA adapters. If you want to only evaluate the base model, simply pass the first argument as "None" in [this line](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/eval_tools/eval.py#L148).

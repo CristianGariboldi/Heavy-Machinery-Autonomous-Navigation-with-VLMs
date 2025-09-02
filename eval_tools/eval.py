@@ -13,6 +13,7 @@ from llava.conversation import conv_templates, SeparatorStyle
 
 from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
 from PIL import Image
+from peft import PeftModel
 
 def get_model_response(model, tokenizer, image_processor, image_path, question):
     """
@@ -52,14 +53,28 @@ def clean_prediction(prediction_text, valid_actions):
             return action
     return "UNKNOWN" # Return if no valid action is found
 
-def evaluate_actions(model_path, eval_data_path, save_path):
+def evaluate_actions(lora_path, model_base_path, eval_data_path, save_path):
     ACTIONS = ["DRIVE_TO_PILE", "DIG", "DUMP", "WAIT"]
     ACTION_QUESTION_SUBSTRING = "what is the most logical next action"
 
-    print("Loading fine-tuned model...")
-    model_name = get_model_name_from_path(model_path)
+    print("Loading base model...")
+    model_name = get_model_name_from_path(model_base_path)
     tokenizer, model, image_processor, context_len = load_senna_pretrained_model(
-        model_path, None, model_name='llava', device_map=0)
+        model_base_path, None, model_name='llava', device_map=0)
+    
+
+    ##### new, loading lora adapters #######
+    if lora_path != None:
+
+        print(f"Applying LoRA adapters from: {lora_path}")
+        model = PeftModel.from_pretrained(model, lora_path)
+
+        print("Merging LoRA weights with the base model...")
+        model = model.merge_and_unload()
+    
+    else:
+        print("No LoRA path provided, using base model only.")
+
     model.eval()
 
     with open(eval_data_path, 'r') as f:
@@ -123,9 +138,11 @@ def evaluate_actions(model_path, eval_data_path, save_path):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Evaluate a fine-tuned VLM on the action prediction task.")
-    parser.add_argument("--model-path", type=str, default="/path/to/vicuna/model", help="Path to the fine-tuned model checkpoint (e.g., your lora_output folder).")
-    parser.add_argument("--eval-data-path", type=str, default="/path/to/output_data/llama_format_dataset.json", help="Path to the llama_format_dataset.json file.")
+    parser.add_argument("--lora-path", type=str, default="/home/hestia-22/Desktop/Heavy-Machinery-Autonomous-Navigation-with-VLMs/lora_output/", 
+                        help="Path to the fine-tuned LoRA checkpoint folder.")
+    parser.add_argument("--model-base-path", type=str, default="/home/hestia-22/Senna/data/huggingface", help="Path to the fine-tuned model checkpoint (e.g., your lora_output folder).")
+    parser.add_argument("--eval-data-path", type=str, default="/home/hestia-22/Desktop/Heavy-Machinery-Autonomous-Navigation-with-VLMs/output_data/eval_dataset.json", help="Path to the llama_format_dataset.json file.")
     parser.add_argument("--save-path", type=str, default="evaluation_results.json", help="Path to save the detailed evaluation results.")
     args = parser.parse_args()
 
-    evaluate_actions(args.model_path, args.eval_data_path, args.save_path)
+    evaluate_actions(args.lora_path, args.model_base_path, args.eval_data_path, args.save_path)
