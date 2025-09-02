@@ -37,7 +37,22 @@ sh data_tools/VLM_converter.sh
 
 With my workstation (2 * NVIDIA RTX 6000 Ada Generation), it takes around 70s/it (with 4-bit quantization, set [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/data_tools/QA_data_generation.py#L34)). Feel free to apply 8-bit quantization instead or remove it completely. With 4-bit quantization, generating QA data for around 2200 images takes around 2 days with my setup.
 
-For your convenience, I already provide the generated QA dataset for all the images, so you don't need to generate QA data by yourself.
+For your convenience, I already provide the generated QA dataset for all the images, so you don't need to generate QA data by yourself (you can find "_all_frames.json" in "output_data" folder).
+
+To inspect the command distribution of the QA dataset, simply run:
+
+```
+python3 data_tools/count_actions.py
+```
+
+In order to fine tune a VLM on this json dataset, we need to properly convert it to the right format. To do that, simply run:
+
+```
+python3 data_tools/convert2llama.py
+```
+
+Also in this case, I already provide this file for your convenience, which you can find it in "output_data" folder, called "llama_format_dataset.json". Before running the script, just make sure to provide the right paths [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/data_tools/convert2llama.py#L61-L67).
+
 
 We can now move to the next step.
 
