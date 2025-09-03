@@ -109,7 +109,7 @@ It will by default evaluate the fine-tuned model with LoRA adapters. If you want
 
 ## Visualization
 
-Run the following script to generate a video where action commands and text descriptions from VLMs are attached to each frame. You will find a "demo_video.mp4" file in "data" folder.
+Run the following script to generate a video where action commands and text descriptions inferred by the VLM are attached to each frame. You will find a "demo_video.mp4" file in "data" folder.
 
 ```
 python3 data_tools/vis.py
