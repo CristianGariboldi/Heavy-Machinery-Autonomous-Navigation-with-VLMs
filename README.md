@@ -1,6 +1,18 @@
 # Heavy-Machinery-Autonomous-Navigation-with-VLMs
 This repository's aim is to enhance autonomous navigation and actions of heavy machines in construction zones leveraging VLMs.
 
+## Table of Contents
+- [Setup](#setup)
+- [Download Image Dataset](#download-image-dataset)
+- [Generate Question-Answer Data](#generate-question-answer-data)
+- [Fine-tuning](#fine-tuning)
+- [Evaluation](#evaluation)
+- [Visualization](#visualization)
+
+
+
+![Demo](./imgs/video.gif)
+
 ## Setup
 
 ```
