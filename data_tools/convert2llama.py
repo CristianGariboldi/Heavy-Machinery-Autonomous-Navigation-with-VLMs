@@ -63,7 +63,7 @@ if __name__ == '__main__':
                         help="Source JSON file path (e.g., _all_frames.json).")
     parser.add_argument("--dst-file", type=str, default="./output_data/llama_format_dataset.json",
                         help="Destination LLaMA-format JSON file path.")
-    parser.add_argument("--image-base-path", type=str, default="/home/hestia-22/Desktop/video_frames_reduced",
+    parser.add_argument("--image-base-path", type=str, default="./video_frames_reduced",
                         help="The base directory where the frame images are stored (e.g., /path/to/video_frames_reduced).")
     
     args = parser.parse_args()

@@ -86,9 +86,9 @@ def stratified_split_dataset(input_file, output_dir, test_size=0.2, random_state
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Split a LLaMA-format dataset with stratification.")
-    parser.add_argument("--input-file", type=str, default="/home/hestia-22/Desktop/Heavy-Machinery-Autonomous-Navigation-with-VLMs/output_data/llama_format_dataset.json",
+    parser.add_argument("--input-file", type=str, default="./output_data/llama_format_dataset.json",
                         help="Path to the source JSON file.")
-    parser.add_argument("--output-dir", type=str, default="/home/hestia-22/Desktop/Heavy-Machinery-Autonomous-Navigation-with-VLMs/output_data",
+    parser.add_argument("--output-dir", type=str, default="./output_data",
                         help="Directory to save the split train and eval files.")
     parser.add_argument("--test-size", type=float, default=0.2,
                         help="Proportion of the dataset to allocate to the evaluation set (e.g., 0.2 for 20%).")

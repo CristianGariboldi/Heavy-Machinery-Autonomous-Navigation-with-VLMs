@@ -138,10 +138,10 @@ def evaluate_actions(lora_path, model_base_path, eval_data_path, save_path):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Evaluate a fine-tuned VLM on the action prediction task.")
-    parser.add_argument("--lora-path", type=str, default="/home/hestia-22/Desktop/Heavy-Machinery-Autonomous-Navigation-with-VLMs/lora_output/", 
+    parser.add_argument("--lora-path", type=str, default="./lora_output/", 
                         help="Path to the fine-tuned LoRA checkpoint folder.")
-    parser.add_argument("--model-base-path", type=str, default="/home/hestia-22/Senna/data/huggingface", help="Path to the fine-tuned model checkpoint (e.g., your lora_output folder).")
-    parser.add_argument("--eval-data-path", type=str, default="/home/hestia-22/Desktop/Heavy-Machinery-Autonomous-Navigation-with-VLMs/output_data/eval_dataset.json", help="Path to the llama_format_dataset.json file.")
+    parser.add_argument("--model-base-path", type=str, default="/path/to/vicuna/model", help="Path to the fine-tuned model checkpoint (e.g., your lora_output folder).")
+    parser.add_argument("--eval-data-path", type=str, default="./output_data/eval_dataset.json", help="Path to the llama_format_dataset.json file.")
     parser.add_argument("--save-path", type=str, default="evaluation_results.json", help="Path to save the detailed evaluation results.")
     args = parser.parse_args()
 

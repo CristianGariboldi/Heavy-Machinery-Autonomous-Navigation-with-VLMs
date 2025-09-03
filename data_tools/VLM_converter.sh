@@ -14,7 +14,7 @@ echo "Start generating dataset..."
 
 /home/hestia-22/anaconda3/envs/sensmore/bin/python \
     data_tools/QA_data_generation.py \
-    --image_folder /home/hestia-22/Desktop/video_frames_reduced \
-    --output_dir /home/hestia-22/Desktop/Heavy-Machinery-Autonomous-Navigation-with-VLMs/output_data
+    --image_folder ./video_frames_reduced \
+    --output_dir ./output_data
 
 echo "Dataset generation complete."

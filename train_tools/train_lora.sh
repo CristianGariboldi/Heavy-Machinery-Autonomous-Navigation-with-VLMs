@@ -2,7 +2,7 @@
 
 MODEL_PATH="/path/to/model/"
 DATA="/path/to/train_dataset.json"
-OUT_DIR="/path/to/save/fine_tuned/model/"
+OUT_DIR="./lora_output"
 
 cd ${WORKING_PATH}
 

@@ -27,6 +27,12 @@ Instead, in **"llava34b"** folder, you should download the [LLaVA-v1.6-34b](http
 
 Make sure to assign the right path of the model in the code [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/data_tools/QA_data_generation.py#L24) and the right PYTHONPATH, CUDA_VISIBLE_DEVICES, LD_LIBRARY_PATH, BNB_CUDA_VERSION, image folder and output directory paths [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/data_tools/VLM_converter.sh#L2-L19). Moreover, if you have installed Miniconda instead of Anaconda, replace "anaconda3" with "miniconda3" [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/data_tools/VLM_converter.sh#L16).
 
+
+### Download Image Dataset
+
+For this project, I downloaded [this video](https://www.youtube.com/watch?v=o5LxOWSQSIk&ab_channel=Gurka) and saved the frames for training and evaluating the performance of our VLM. You can downloaded the images dataset from [here](https://drive.google.com/file/d/1pHnbxObL3RV4dd0LCcmqnf02Gf2rgnEc/view?usp=sharing). This dataset will be necessary in the next stages.
+
+
 ## Generate Question-Answer Data
 
 To start generating QA data, make sure to be under the root directory of the project, and run:
@@ -99,3 +105,12 @@ sh eval_tools/eval.sh
 Before running the script, make sure to add the right paths [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/eval_tools/eval.py#L141-L144) and [here](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/eval_tools/eval.sh#L1-L2).
 
 It will by default evaluate the fine-tuned model with LoRA adapters. If you want to only evaluate the base model, simply pass the first argument as "None" in [this line](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/eval_tools/eval.py#L148).
+
+
+## Visualization
+
+Run the following script to generate a video where action commands and text descriptions from VLMs are attached to each frame. You will find a "demo_video.mp4" file in "data" folder.
+
+```
+python3 data_tools/vis.py
+```
