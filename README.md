@@ -1,6 +1,9 @@
 # Heavy-Machinery-Autonomous-Navigation-with-VLMs
 This repository's aim is to enhance autonomous navigation and actions of heavy machines in construction zones leveraging VLMs.
 
+You can download the technical report by [pressing here](docs/report.pdf).
+
+
 ## Table of Contents
 - [Setup](#setup)
 - [Download Image Dataset](#download-image-dataset)
@@ -104,6 +107,9 @@ The training loop using LoRA will start and once finished it will save the fine-
 If you have the computation capabilities to run a full-parameter fine-tuning instead of using LoRA, simply remove [this line](https://github.com/CristianGariboldi/Heavy-Machinery-Autonomous-Navigation-with-VLMs/blob/main/train_tools/train_lora.sh#L26).
 
 
+For your convenience, I already fine-tuned the model, and you can download the lora adapters [here](https://drive.google.com/file/d/1I-aqX7SolrQqQbo38npbIw4Rj2xhtvUS/view?usp=sharing).
+
+
 ## Evaluation
 
 After fine-tuning is successfully concluded, we can now evaluate its performance on the evaluation dataset.
@@ -126,3 +132,57 @@ Run the following script to generate a video where action commands and text desc
 ```
 python3 data_tools/vis.py
 ```
+
+## Results
+
+### Base Model
+
+**Overall Accuracy:** 18.33%
+
+
+**Classification Report**
+| Class           | Precision | Recall | F1-score | Support |
+|-----------------|-----------|--------|----------|---------|
+| DRIVE_TO_PILE   | 0.60      | 0.01   | 0.02     | 362     |
+| DIG             | 0.18      | 0.97   | 0.30     | 80      |
+| DUMP            | 0.00      | 0.00   | 0.00     | 0       |
+| WAIT            | 0.00      | 0.00   | 0.00     | 0       |
+| micro avg       | 0.18      | 0.18   | 0.18     | 442     |
+| macro avg       | 0.19      | 0.25   | 0.08     | 442     |
+| weighted avg    | 0.52      | 0.18   | 0.07     | 442     |
+
+
+**Confusion Matrix (Rows: Ground Truth, Cols: Prediction)**
+|                | DRIVE_TO_PILE | DIG | DUMP | WAIT |
+|----------------|:-------------:|:---:|:----:|:----:|
+| DRIVE_TO_PILE  |      3        | 359 |  0   |  0   |
+| DIG            |      2        | 78  |  0   |  0   |
+| DUMP           |      0        |  0  |  0   |  0   |
+| WAIT           |      0        |  0  |  0   |  0   |
+
+---
+
+### Fine-Tuned Model
+
+**Overall Accuracy:** 83.71%
+
+
+**Classification Report**
+| Class           | Precision | Recall | F1-score | Support |
+|-----------------|-----------|--------|----------|---------|
+| DRIVE_TO_PILE   | 0.91      | 0.89   | 0.90     | 362     |
+| DIG             | 0.55      | 0.59   | 0.57     | 80      |
+| DUMP            | 0.00      | 0.00   | 0.00     | 0       |
+| WAIT            | 0.00      | 0.00   | 0.00     | 0       |
+| micro avg       | 0.84      | 0.84   | 0.84     | 442     |
+| macro avg       | 0.36      | 0.37   | 0.37     | 442     |
+| weighted avg    | 0.84      | 0.84   | 0.84     | 442     |
+
+
+**Confusion Matrix (Rows: Ground Truth, Cols: Prediction)**
+|                | DRIVE_TO_PILE | DIG | DUMP | WAIT |
+|----------------|:-------------:|:---:|:----:|:----:|
+| DRIVE_TO_PILE  |     323       | 39  |  0   |  0   |
+| DIG            |     33        | 47  |  0   |  0   |
+| DUMP           |      0        |  0  |  0   |  0   |
+| WAIT           |      0        |  0  |  0   |  0   |
